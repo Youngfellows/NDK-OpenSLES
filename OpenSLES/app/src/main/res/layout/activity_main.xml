@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/recorderBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text = "OpenSLES录音"/>
+
+    <Button
+        android:id="@+id/pauseRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text = "OpenSLES暂停录音"/>
+
+    <Button
+        android:id="@+id/startPlayBtn"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onOpenSLESPlayClick"
+        android:textAllCaps="false"
+        android:text = "OpenSLES播放"/>
+
+    <Button
+        android:id="@+id/pauseBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onOpenSLESPauseClick"
+        android:textAllCaps="false"
+        android:text = "OpenSLES暂停"/>
+
+
+    <Button
+        android:id="@+id/stopBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onOpenSLESStopClick"
+        android:textAllCaps="false"
+        android:text = "OpenSLES停止"/>
+
+
+
+</LinearLayout>
