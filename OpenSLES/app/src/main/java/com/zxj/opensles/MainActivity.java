@@ -22,13 +22,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean mHasWriteStoragePermission = false;
 
-    private ActivityMainBinding binding;
-//    private String mPcmFile = "test.raw";
-    private String mPcmFile = "audio.pcm";
-    private String mPcmFilePrivatePath;
-    private OpenSlESPlayer mOpenSlEsPlayer;
+    private ActivityMainBinding   binding;
+    //    private String mPcmFile = "test.raw";
+    private String                mPcmFile = "audio.pcm";
+    private String                mPcmFilePrivatePath;
+    private OpenSlESPlayer        mOpenSlEsPlayer;
     private OpenSlESAudioRecorder mOpenSlEsRecorder;
-    private Button mPauseBtn,mRecorderBtn,mPauseRecord;
+    private Button                mPauseBtn, mRecorderBtn, mPauseRecord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mOpenSlEsRecorder = new OpenSlESAudioRecorder();
 
         mPcmFilePrivatePath = FileUtils.copyData(getApplicationContext(), mPcmFile, mPcmFile);
-        Log.e(TAG, "filePath=" +  mPcmFilePrivatePath);
+        Log.e(TAG, "filePath=" + mPcmFilePrivatePath);
 
     }
 
@@ -58,11 +58,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPauseRecord.setOnClickListener(this);
     }
 
-    private void requestPermission(){
+    private void requestPermission() {
         RxPermissions rxPermissions = new RxPermissions(this);
 
         rxPermissions.requestEach(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.RECORD_AUDIO)
+                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO)
                 .subscribe(new Consumer<Permission>() {
                     @Override
                     public void accept(Permission permission) throws Exception {
@@ -86,49 +86,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void onOpenSLESPlayClick(View view){
-        if(TextUtils.isEmpty(mPcmFilePrivatePath)){
-            Toast.makeText(this,"路径不能为空!",Toast.LENGTH_SHORT).show();
-//            mPcmFilePrivatePath = "/data/user/0/com.zxj.opensles/files/test.raw";
+    public void onOpenSLESPlayClick(View view) {
+        if (TextUtils.isEmpty(mPcmFilePrivatePath)) {
+            Toast.makeText(this, "路径不能为空!", Toast.LENGTH_SHORT).show();
+            //            mPcmFilePrivatePath = "/data/user/0/com.zxj.opensles/files/test.raw";
             return;
         }
-        mPcmFilePrivatePath = getExternalFilesDir("audio").getAbsoluteFile()+"/audio.pcm";
+        mPcmFilePrivatePath = getExternalFilesDir("audio").getAbsoluteFile() + "/audio.pcm";
+        Log.i(TAG, "onOpenSLESPlayClick:: mPcmFilePrivatePath=" + mPcmFilePrivatePath);
         mOpenSlEsPlayer.setPcmData(mPcmFilePrivatePath);
     }
 
-    public void onOpenSLESStopClick(View view){
+    public void onOpenSLESStopClick(View view) {
         mOpenSlEsPlayer.stop();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.pauseBtn:
-                if("OpenSLES暂停".equals(mPauseBtn.getText().toString().trim())){
+                if ("OpenSLES暂停".equals(mPauseBtn.getText().toString().trim())) {
                     mPauseBtn.setText("OpenSLES继续");
                     mOpenSlEsPlayer.pause();
-                }else {
+                } else {
                     mOpenSlEsPlayer.resume();
                     mPauseBtn.setText("OpenSLES暂停");
                 }
                 break;
             case R.id.recorderBtn:
-                if("OpenSLES录音".equals(mRecorderBtn.getText().toString().trim())){
+                if ("OpenSLES录音".equals(mRecorderBtn.getText().toString().trim())) {
                     mRecorderBtn.setText("OpenSLES停止");
-                    String path = getExternalFilesDir("audio").getAbsoluteFile()+"/audio.pcm";
+                    String path = getExternalFilesDir("audio").getAbsoluteFile() + "/audio.pcm";
+                    Log.i(TAG, "onClick:: path=" + path);
                     mOpenSlEsRecorder.startRecord(path);
-//                    mOpenSlEsRecorder.startRecord("/sdcard/audio.pcm");
-//                    mOpenSlEsRecorder.startRecord(getFilesDir().getAbsolutePath() +"/audio.pcm");
-                }else {
+                    //mOpenSlEsRecorder.startRecord("/sdcard/audio.pcm");
+                    //mOpenSlEsRecorder.startRecord(getFilesDir().getAbsolutePath() +"/audio.pcm");
+                } else {
                     mRecorderBtn.setText("OpenSLES录音");
                     mOpenSlEsRecorder.stopRecord();
                 }
                 break;
             case R.id.pauseRecord:
-                if("OpenSLES暂停录音".equals(mPauseRecord.getText().toString().trim())){
+                if ("OpenSLES暂停录音".equals(mPauseRecord.getText().toString().trim())) {
                     mPauseRecord.setText("OpenSLES继续录音");
                     mOpenSlEsRecorder.pauseRecord();
-                }else {
+                } else {
                     mPauseRecord.setText("OpenSLES暂停录音");
                     mOpenSlEsRecorder.recordingRecord();
                 }

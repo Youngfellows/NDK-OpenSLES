@@ -1,6 +1,10 @@
 package com.jhuster.audiodemo.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +43,27 @@ public class MainActivity extends AppCompatActivity {
         mTestSpinner = (Spinner) findViewById(R.id.TestSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, TEST_PROGRAM_ARRAY);
         mTestSpinner.setAdapter(adapter);
+        checkPermission();
+    }
+
+    private void checkPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
+        ) {
+
+        } else {
+            requestPermissionAll();
+        }
+    }
+
+    private void requestPermissionAll() {
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+
+        }, 103);
     }
 
     public void onClickStartTest(View v) {
