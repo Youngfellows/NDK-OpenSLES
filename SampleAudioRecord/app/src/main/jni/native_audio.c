@@ -14,6 +14,7 @@
 #include <jni.h>
 #include <android/log.h>
 #include "opensl_io.h"
+#include "com_tiffany_audiorecord_tester_NativeAudioTester.h"
 
 #define LOG(...) __android_log_print(ANDROID_LOG_DEBUG,"AudioDemo-JNI",__VA_ARGS__)
 
@@ -23,7 +24,7 @@
 #define FRAME_SIZE SAMPLERATE*PERIOD_TIME/1000
 #define BUFFER_SIZE FRAME_SIZE*CHANNELS
 //#define TEST_CAPTURE_FILE_PATH "/sdcard/audio.pcm"
-#define TEST_CAPTURE_FILE_PATH "/storage/emulated/0/Android/data/com.jhuster.audiodemo/cache/audio.pcm"
+#define TEST_CAPTURE_FILE_PATH "/storage/emulated/0/Android/data/com.tiffany.audiorecord/cache/audio.pcm"
 
 static volatile int g_loop_exit = 0;
 
@@ -32,7 +33,7 @@ static volatile int g_loop_exit = 0;
  * Method:    nativeStartCapture
  * Signature: ()Z
  */
-JNIEXPORT jboolean JNICALL Java_com_jhuster_audiodemo_tester_NativeAudioTester_nativeStartCapture(JNIEnv *env, jobject thiz)
+JNIEXPORT jboolean JNICALL Java_com_tiffany_audiorecord_tester_NativeAudioTester_nativeStartCapture(JNIEnv *env, jobject thiz)
 {
     FILE * fp = fopen(TEST_CAPTURE_FILE_PATH, "wb");
     if( fp == NULL ) {
@@ -76,7 +77,7 @@ JNIEXPORT jboolean JNICALL Java_com_jhuster_audiodemo_tester_NativeAudioTester_n
  * Method:    nativeStopCapture
  * Signature: ()Z
  */
-JNIEXPORT jboolean JNICALL Java_com_jhuster_audiodemo_tester_NativeAudioTester_nativeStopCapture(JNIEnv *env, jobject thiz)
+JNIEXPORT jboolean JNICALL Java_com_tiffany_audiorecord_tester_NativeAudioTester_nativeStopCapture(JNIEnv *env, jobject thiz)
 {
     g_loop_exit = 1;
     return JNI_TRUE;
@@ -87,7 +88,7 @@ JNIEXPORT jboolean JNICALL Java_com_jhuster_audiodemo_tester_NativeAudioTester_n
  * Method:    nativeStartPlayback
  * Signature: ()Z
  */
-JNIEXPORT jboolean JNICALL Java_com_jhuster_audiodemo_tester_NativeAudioTester_nativeStartPlayback(JNIEnv *env, jobject thiz)
+JNIEXPORT jboolean JNICALL Java_com_tiffany_audiorecord_tester_NativeAudioTester_nativeStartPlayback(JNIEnv *env, jobject thiz)
 {
     FILE * fp = fopen(TEST_CAPTURE_FILE_PATH, "rb");
     if( fp == NULL ) {
@@ -130,7 +131,7 @@ JNIEXPORT jboolean JNICALL Java_com_jhuster_audiodemo_tester_NativeAudioTester_n
  * Method:    nativeStopPlayback
  * Signature: ()Z
  */
-JNIEXPORT jboolean JNICALL Java_com_jhuster_audiodemo_tester_NativeAudioTester_nativeStopPlayback(JNIEnv *env, jobject thiz)
+JNIEXPORT jboolean JNICALL Java_com_tiffany_audiorecord_tester_NativeAudioTester_nativeStopPlayback(JNIEnv *env, jobject thiz)
 {
     g_loop_exit = 1;
     return JNI_TRUE;
