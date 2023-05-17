@@ -8,6 +8,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -63,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void recordAudio() {
-        AudioRecordUtil.startRecord(Environment.getExternalStorageDirectory().getAbsolutePath() + "/wl_opensl_record.pcm");
+        String pcmFilepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/wl_opensl_record.pcm";
+        Log.i(TAG, "recordAudio:: pcmFilepath="+pcmFilepath);
+        AudioRecordUtil.startRecord(pcmFilepath);
     }
 
     private void stopRecordAudio() {
