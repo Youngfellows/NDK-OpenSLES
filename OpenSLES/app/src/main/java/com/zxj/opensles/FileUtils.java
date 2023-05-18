@@ -15,7 +15,8 @@ public class FileUtils {
         Log.d(TAG, "copyData, assetPath=" + assetPath + ", privateDataPath=" + privateDataPath);
         InputStream in = null;
         FileOutputStream out = null;
-        String path = context.getFilesDir().getAbsolutePath() + "/" + privateDataPath; // data/data目录
+        //String path = context.getFilesDir().getAbsolutePath() + "/" + privateDataPath; // data/data目录
+        String path = context. getExternalFilesDir("audio") + "/" + privateDataPath; // data/data目录
         Log.d(TAG,"path:"+path);
         File file = new File(path);
         if (!file.exists()) {

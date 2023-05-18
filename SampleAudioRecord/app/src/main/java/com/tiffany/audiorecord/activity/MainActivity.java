@@ -221,4 +221,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Start play wav!", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void onStopPlay(View v) {
+        if (mTester != null) {
+            mTester.stopTesting();
+            Toast.makeText(this, "Stop Testing !", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
