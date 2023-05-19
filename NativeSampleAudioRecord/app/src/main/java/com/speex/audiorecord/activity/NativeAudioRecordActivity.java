@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.net168.audiorecord.AudioCapture;
 import com.net168.audiorecord.OnAudioCaptureCallback;
 import com.speex.audiorecord.R;
+import com.speex.audiorecord.SpeexAudioCapture;
 import com.speex.audiorecord.api.wav.WavFileWriter;
 import com.speex.audiorecord.tester.AudioPlayerTester;
 import com.speex.audiorecord.tester.Tester;
@@ -34,7 +35,7 @@ public class NativeAudioRecordActivity extends AppCompatActivity implements View
     private Button mButtonOpenSLESStart;
     private Button mButtonOpenSLESStop;
 
-    private AudioCapture mAudioCapture;//AudioRecord录音
+    private SpeexAudioCapture mAudioCapture;//AudioRecord录音
     private WavFileWriter mWavFileWriter;
     private Tester mTester;
 
@@ -119,7 +120,8 @@ public class NativeAudioRecordActivity extends AppCompatActivity implements View
             e.printStackTrace();
         }
         // 开启录音
-        mAudioCapture = new AudioCapture(AudioCapture.AUDIO_CAPTURE_TYPE_AUDIORECORD, AudioCapture.AUDIO_SAMPLE_RATE_44_1,
+        mAudioCapture = new SpeexAudioCapture();
+        mAudioCapture.init(AudioCapture.AUDIO_CAPTURE_TYPE_AUDIORECORD, AudioCapture.AUDIO_SAMPLE_RATE_44_1,
                 AudioCapture.AUDIO_CHANNEL_MONO, AudioCapture.AUDIO_FORMAT_PCM_16BIT);
         if (mAudioCapture.getState() == AudioCapture.STATE_IDLE) {
             mAudioCapture.setAudioCaptureCallback(new MyOnAudioCaptureCallback());
@@ -161,7 +163,8 @@ public class NativeAudioRecordActivity extends AppCompatActivity implements View
             e.printStackTrace();
         }
         // 开启录音
-        mAudioCapture = new AudioCapture(AudioCapture.AUDIO_CAPTURE_TYPE_OPENSLES, AudioCapture.AUDIO_SAMPLE_RATE_44_1,
+        mAudioCapture = new SpeexAudioCapture();
+        mAudioCapture.init(AudioCapture.AUDIO_CAPTURE_TYPE_OPENSLES, AudioCapture.AUDIO_SAMPLE_RATE_44_1,
                 AudioCapture.AUDIO_CHANNEL_MONO, AudioCapture.AUDIO_FORMAT_PCM_16BIT);
         if (mAudioCapture.getState() == AudioCapture.STATE_IDLE) {
             mAudioCapture.setAudioCaptureCallback(new MyOnAudioCaptureCallback());

@@ -14,6 +14,7 @@ set(audiorecord_DIR ${CMAKE_SOURCE_DIR}/../AudioRecorderLib)
 
 # 加载lib需要暴露的头文件
 include_directories(${audiorecord_DIR}/src/main/cpp/include)
+include_directories(${audiorecord_DIR}/src/main/cpp/base)
 
 # 导入lib工程的so库
 add_library(audiorecord SHARED IMPORTED)

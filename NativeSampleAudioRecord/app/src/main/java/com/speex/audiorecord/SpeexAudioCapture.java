@@ -43,7 +43,7 @@ public class SpeexAudioCapture implements SpeexAudioRecord {
         return mNativeInstance != 0;
     }
 
-    public void start() {
+    public void startRecording() {
         if (mNativeInstance == 0) {
             Logger.e("SpeexAudioCapture not exit");
             return;
@@ -52,7 +52,7 @@ public class SpeexAudioCapture implements SpeexAudioRecord {
     }
 
 
-    public void stop() {
+    public void stopRecording() {
         if (mNativeInstance == 0) {
             Logger.e("SpeexAudioCapture not exit");
             return;
@@ -60,7 +60,7 @@ public class SpeexAudioCapture implements SpeexAudioRecord {
         _stop(mNativeInstance);
     }
 
-    public void release() {
+    public void releaseRecording() {
         if (mNativeInstance == 0) {
             Logger.e("SpeexAudioCapture not exit");
             return;
@@ -88,7 +88,8 @@ public class SpeexAudioCapture implements SpeexAudioRecord {
 
 
     /**
-     * 提供native层回调使用，传出nio接口的bytebuffer数据
+     * 1.提供native层回调使用，传出nio接口的bytebuffer数据、
+     * 2.再把数据回调给调用者
      */
     private void onNativeDataRead(ByteBuffer buffer) {
         if (mCallback != null) {

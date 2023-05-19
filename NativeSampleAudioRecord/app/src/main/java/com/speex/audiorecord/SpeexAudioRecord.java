@@ -22,17 +22,17 @@ public interface SpeexAudioRecord {
     /**
      * 开始录制器工作
      */
-    void start();
+    void startRecording();
 
     /**
      * 暂停录制器工作
      */
-    void stop();
+    void stopRecording();
 
     /**
      * 释放录制器资源，重新start()需要先init()
      */
-    void release();
+    void releaseRecording();
 
     /**
      * 获取录制器当前状态
