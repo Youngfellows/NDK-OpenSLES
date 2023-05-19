@@ -80,14 +80,19 @@ public class OpenSLESRecord implements BaseRecord {
 
     //forward to openslesrecord.cpp # Java_com_net168_audiorecord_opensles_OpenSLESRecord__1initRecord
     private native long _initRecord(int sampleRate, int channelConfig, int audioFormat);
+
     //forwar to openslesrecord.cpp # Java_com_net168_audiorecord_opensles_OpenSLESRecord__1stop
     private native void _stop(long instance);
+
     //forwar to openslesrecord.cpp # Java_com_net168_audiorecord_opensles_OpenSLESRecord__1start
     private native void _start(long instance);
+
     //forwar to openslesrecord.cpp # Java_com_net168_audiorecord_opensles_OpenSLESRecord__1release
     private native void _release(long instance);
+
     //forwar to openslesrecord.cpp # Java_com_net168_audiorecord_opensles_OpenSLESRecord__1getState
     private native int _getState(long instance);
+
     //forwar to openslesrecord.cpp # Java_com_net168_audiorecord_opensles_OpenSLESRecord__1setNativeCallback
     private native void _setNativeCallback(long instance, boolean need);
 

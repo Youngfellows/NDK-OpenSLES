@@ -6,4 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".activity.NativeAudioRecordActivity">
 
+
+    <Button
+        android:id="@+id/btn_audio_record_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="AudioRecord录音"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/btn_audio_record_stop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+    <Button
+        android:id="@+id/btn_audio_record_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="AudioRecord停止录音"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/btn_opensles_start"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/btn_opensles_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OpenSLES录音"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_opensles_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OpenSLES停止录音"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_opensles_start" />
+
+    <Button
+        android:id="@+id/btn_wav_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="onWavPlay"
+        android:text="播放AudioRecord录制wav音频文"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_opensles_stop" />
+
+    <Button
+        android:id="@+id/btn_opensles_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onOpenSLESPlay"
+        android:text="播放OpenSL ES录制pcm音频"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_wav_play" />
+
+    <Button
+        android:id="@+id/btn_stop_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onStopPlay"
+        android:text="停止播放"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_opensles_play" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

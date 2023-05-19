@@ -158,6 +158,7 @@ public class AudioRecordRecord implements BaseRecord {
 
     /**
      * 仅提供jni调用，设置一个PCM数据回调，后续会将数据发送会native
+     *
      * @param run native是否需要设置监听
      */
     private void setNativeCallback(boolean run) {
@@ -174,15 +175,14 @@ public class AudioRecordRecord implements BaseRecord {
                     mBuffer.clear();
                     //将数据导入mBuffer中，注意size不一定等于data.length
                     //不能直接mBuffer.put(data),会有脏数据
-                    mBuffer.put(data, 0 ,size);
+                    mBuffer.put(data, 0, size);
                     //将写入状态变更为读取状态
                     mBuffer.flip();
                     //将数据发送到Native层业务
                     sendDataToNative(mInstance, mBuffer);
                 }
             });
-        }
-        else {
+        } else {
             //native层取消pcm回调
             setAudioCaptureCallback(null);
         }

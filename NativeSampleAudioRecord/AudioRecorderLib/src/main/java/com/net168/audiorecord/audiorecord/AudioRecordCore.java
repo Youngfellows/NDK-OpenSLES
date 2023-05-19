@@ -19,7 +19,8 @@ class AudioRecordCore {
 
     private OnAudioCaptureCallback mCallback;
 
-    AudioRecordCore() {}
+    AudioRecordCore() {
+    }
 
     boolean createRecord(int sampleRate, int channelConfig, int audioFormat) {
         //防止多次初始化
@@ -35,8 +36,7 @@ class AudioRecordCore {
             mAudioRecord = null;
             mRecordBufSize = 0;
             return false;
-        }
-        else {
+        } else {
             //创建一个数据缓冲区
             Logger.i("init AudioRecord success.");
             //创建一个位置用于存放后续的PCM数据
@@ -98,7 +98,7 @@ class AudioRecordCore {
     }
 
     /**
-     *  只包含正在录制的状态
+     * 只包含正在录制的状态
      */
     boolean isRecording() {
         return mState == RECORDING;
@@ -122,12 +122,11 @@ class AudioRecordCore {
                 //如果读取音频数据没有出现错误 ===> read 大于0
                 if (read >= AudioRecord.SUCCESS) {
                     Logger.v("read raw pcm data, size is ", read);
-                    synchronized (AudioRecordRecord.class){
+                    synchronized (AudioRecordRecord.class) {
                         if (mCallback != null)
                             mCallback.onPCMDataAvailable(mPcmData, read);
                     }
-                }
-                else {
+                } else {
                     Logger.w("read data with err code = ", read);
                 }
             }
