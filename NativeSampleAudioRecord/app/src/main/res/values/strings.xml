@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">NativeSampleAudioRecord</string>
+    <string name="audio_record_start_recording">AudioRecord录音</string>
+    <string name="audio_record_stop_recording">AudioRecord停止录音</string>
+    <string name="opensles_start_recording">OpenSLES录音</string>
+    <string name="opensles_stop_recording">OpenSLES停止录音</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.speex.audiorecord;
 
+import android.util.Log;
+
 import com.net168.audiorecord.OnAudioCaptureCallback;
 import com.orhanobut.logger.Logger;
 
@@ -92,9 +94,11 @@ public class SpeexAudioCapture implements SpeexAudioRecord {
      * 2.再把数据回调给调用者
      */
     private void onNativeDataRead(ByteBuffer buffer) {
+        int size = buffer.capacity();
+        Log.i(TAG, "onNativeDataRead:: size:" + size);
         if (mCallback != null) {
             //获取返回的size大小，一般来说是固定一个数
-            int size = buffer.capacity();
+            //int size = buffer.capacity();
             //如果数据缓存区未初始化或者空间不够存放则重新申请一个缓存空间
             if (mData == null || mData.length < size)
                 mData = new byte[size];

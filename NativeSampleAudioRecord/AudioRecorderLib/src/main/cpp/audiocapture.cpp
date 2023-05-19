@@ -58,11 +58,12 @@ AudioCapture::~AudioCapture() {
 
 
 extern "C" jint JNIEXPORT JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved) {
-    LOG_W("%s():: Line %d\n", __FUNCTION__, __LINE__)
+    LOG_E("%s():: Line %d\n", __FUNCTION__, __LINE__)
     JNIEnv *env = nullptr;
     if (jvm->GetEnv((void **) &env, JNI_VERSION_1_6) != JNI_OK)
         return -1;
     //初始化全局jvm，用于提供其他线程的jni环境
     initGlobalJvm(jvm);
+    LOG_E("%s():: Line %d\n", __FUNCTION__, __LINE__)
     return JNI_VERSION_1_6;
 }

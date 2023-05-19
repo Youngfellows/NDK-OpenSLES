@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.JavaAudioRecordActivity">
-    
+
+
     <Button
         android:id="@+id/btn_audio_record_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="AudioRecord录音"
+        android:text="@string/audio_record_start_recording"
         android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@+id/btn_audio_record_stop"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -23,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="AudioRecord停止录音"
+        android:text="@string/audio_record_stop_recording"
         android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@+id/btn_opensles_start"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -33,7 +34,7 @@
         android:id="@+id/btn_opensles_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OpenSLES录音"
+        android:text="@string/opensles_start_recording"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -44,7 +45,7 @@
         android:id="@+id/btn_opensles_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OpenSLES停止录音"
+        android:text="@string/opensles_stop_recording"
         android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

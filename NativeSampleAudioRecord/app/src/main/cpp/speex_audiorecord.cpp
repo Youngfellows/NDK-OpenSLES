@@ -22,14 +22,14 @@ static AudioJniCallback *jniData;
 * @param ctx
 */
 void static readData(int8_t *data, uint32_t size, void *ctx) {
-    LOG_D("%s():: Line %d,size:%d\n", __FUNCTION__, __LINE__, size)
+    //LOG_D("%s():: Line %d,size:%d\n", __FUNCTION__, __LINE__, size)
     CHECK_CTX(ctx)
     AudioCapture *capture = static_cast<AudioCapture *>(ctx);
     if (!jniData)
         return;
     bool thread = false; //记录当前是否存在jni环境
     JNIEnv *env = getEnv(&thread);
-    LOG_D("%s():: Line %d,thread:%d\n", __FUNCTION__, __LINE__, thread)
+    //LOG_D("%s():: Line %d,thread:%d,size:%d\n", __FUNCTION__, __LINE__, thread, size)
     //将pcm数据封装成NIO buffer传输到java层
     jobject buffer = env->NewDirectByteBuffer(data, size * sizeof(int8_t));
     env->CallVoidMethod(jniData->java_object, jniData->method_data_callback, buffer);
@@ -132,7 +132,7 @@ JNIEXPORT jint JNICALL Java_com_speex_audiorecord_SpeexAudioCapture__1getState
  */
 JNIEXPORT void JNICALL Java_com_speex_audiorecord_SpeexAudioCapture__1setNativeCallback
         (JNIEnv *env, jobject instance, jlong ctx, jboolean need) {
-    LOG_D("%s():: Line %d\n", __FUNCTION__, __LINE__)
+    LOG_D("%s():: Line %d,need:%d\n", __FUNCTION__, __LINE__, need)
     if (need) {
         //设置回调函数
         jniData = new AudioJniCallback();
@@ -142,6 +142,23 @@ JNIEXPORT void JNICALL Java_com_speex_audiorecord_SpeexAudioCapture__1setNativeC
                                                               "(Ljava/nio/ByteBuffer;)V");
     }
 }
+
+//extern "C"
+//jint JNIEXPORT JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved) {
+//    LOG_E("%s():: Line %d\n", __FUNCTION__, __LINE__)
+//    JNIEnv *env = nullptr;
+//    if (jvm->GetEnv((void **) &env, JNI_VERSION_1_6) != JNI_OK)
+//        return -1;
+//    //初始化全局jvm，用于提供其他线程的jni环境
+//    initGlobalJvm(jvm);
+//    LOG_E("%s():: Line %d\n", __FUNCTION__, __LINE__)
+//    return JNI_VERSION_1_6;
+//}
+//
+//extern "C"
+//JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved) {
+//    LOGI("%s,Line %d\n", __FUNCTION__, __LINE__);
+//}
 
 #ifdef __cplusplus
 }

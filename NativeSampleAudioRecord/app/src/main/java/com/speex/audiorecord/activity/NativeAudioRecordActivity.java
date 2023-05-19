@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -89,13 +90,27 @@ public class NativeAudioRecordActivity extends AppCompatActivity implements View
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_audio_record_start:
-                audioRecordStart();
+                String label = mButtonAudioRecordStart.getText().toString();
+                if (TextUtils.equals(label, getResources().getText(R.string.audio_record_stop_recording))) {
+                    audioRecordStop();
+                    mButtonAudioRecordStart.setText(getResources().getString(R.string.audio_record_start_recording));
+                } else if (TextUtils.equals(label, getResources().getText(R.string.audio_record_start_recording))) {
+                    audioRecordStart();
+                    mButtonAudioRecordStart.setText(getResources().getString(R.string.audio_record_stop_recording));
+                }
                 break;
             case R.id.btn_audio_record_stop:
                 audioRecordStop();
                 break;
             case R.id.btn_opensles_start:
-                openslesStart();
+                String label2 = mButtonOpenSLESStart.getText().toString();
+                if (TextUtils.equals(label2, getResources().getText(R.string.opensles_stop_recording))) {
+                    openslesStop();
+                    mButtonOpenSLESStart.setText(getResources().getString(R.string.opensles_start_recording));
+                } else if (TextUtils.equals(label2, getResources().getText(R.string.opensles_start_recording))) {
+                    openslesStart();
+                    mButtonOpenSLESStart.setText(getResources().getString(R.string.opensles_stop_recording));
+                }
                 break;
             case R.id.btn_opensles_stop:
                 openslesStop();
@@ -126,8 +141,6 @@ public class NativeAudioRecordActivity extends AppCompatActivity implements View
         if (mAudioCapture.getState() == AudioCapture.STATE_IDLE) {
             mAudioCapture.setAudioCaptureCallback(new MyOnAudioCaptureCallback());
             mAudioCapture.startRecording();
-        } else {
-            mAudioCapture.releaseRecording();
         }
     }
 
